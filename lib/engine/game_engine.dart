@@ -5,14 +5,17 @@ import '../models/game_state.dart';
 import '../data/cards_data.dart';
 import '../data/generals_data.dart';
 import 'card_effects.dart';
+import 'ai_engine.dart';
 
 /// 游戏引擎 - 控制游戏流程
 class GameEngine {
   GameState state;
   final Random _random = Random();
-  final CardEffects _effects;
+  late final CardEffects _effects;
 
-  GameEngine(this.state) : _effects = CardEffects(this);
+  GameEngine(this.state) {
+    _effects = CardEffects(this);
+  }
 
   /// 创建新游戏（4人局）
   static GameEngine create(List<String> playerNames) {
@@ -230,11 +233,11 @@ class GameEngine {
     if (p.handCards.length > limit) {
       state.addLog('${p.name} 需要弃牌至 $limit 张（当前 ${p.handCards.length} 张）');
       // AI 自动弃牌
-      if (p is AIPlayer) {
-        p.autoDiscard(this);
-      } else {
-        // 等待玩家操作
+      if (p.id != 0) {
+        final ai = AIEngine(this);
+        ai.autoDiscard(p);
       }
+      // 玩家手动弃牌（由UI处理）
     }
   }
 
@@ -275,9 +278,4 @@ class GameEngine {
         player.handCards.any((c) => c.subtype == CardSubtype.dodge)) return false;
     return true;
   }
-}
-
-/// AI玩家标记接口
-abstract class AIPlayer {
-  void autoDiscard(GameEngine engine);
 }

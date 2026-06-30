@@ -1,3 +1,5 @@
+import 'card.dart';
+
 /// 势力
 enum Kingdom { wei, shu, wu, other }
 
@@ -40,6 +42,7 @@ class Skill {
 enum SkillTrigger {
   passive, // 锁定技，自动触发
   active, // 主动技能，出牌阶段使用
+  triggered, // 触发技，条件触发
   onDamage, // 受到伤害时
   onDealDamage, // 造成伤害时
   onDeath, // 有人死亡时

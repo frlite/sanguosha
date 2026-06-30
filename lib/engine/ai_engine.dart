@@ -1,5 +1,6 @@
 import 'dart:math';
 import '../models/card.dart';
+import '../models/general.dart';
 import '../models/game_state.dart';
 import 'game_engine.dart';
 
@@ -248,6 +249,7 @@ class AIEngine {
       case Role.traitor:
         return other.role != Role.traitor;
     }
+    return false;
   }
 
   /// 最佳杀的目标

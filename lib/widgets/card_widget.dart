@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../models/card.dart';
+import '../models/card.dart' as card_model;
 
 /// 卡牌组件
 class CardWidget extends StatelessWidget {
-  final Card card;
+  final card_model.Card card;
   final bool faceDown;
   final bool selected;
   final bool highlighted;
@@ -100,7 +100,7 @@ class CardWidget extends StatelessWidget {
 
 /// 小卡牌（用于展示区域）
 class MiniCard extends StatelessWidget {
-  final Card card;
+  final card_model.Card card;
   final double size;
 
   const MiniCard({super.key, required this.card, this.size = 32});

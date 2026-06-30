@@ -94,7 +94,7 @@ class PlayerWidget extends StatelessWidget {
               SizedBox(height: 4),
               Row(
                 mainAxisSize: MainAxisSize.min,
-                children: player.equipment.getAll().map((e) => MiniCard(card: e, size: 24)).toList(),
+                children: player.equipment.getAll().map((e) => MiniCard(card: e, size: 24)).toList().cast<Widget>(),
               ),
             ],
             // 状态
